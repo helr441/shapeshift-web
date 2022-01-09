@@ -10,11 +10,12 @@ import {
   Tag,
   Wrap
 } from '@chakra-ui/react'
+import { mustBeDefined } from '@shapeshiftoss/hdwallet-core'
 import * as native from '@shapeshiftoss/hdwallet-native'
-import { GENERATE_MNEMONIC, Vault } from '@shapeshiftoss/hdwallet-native-vault'
 import { range } from 'lodash'
-import { Component, useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { FaEye } from 'react-icons/fa'
+import { GENERATE_MNEMONIC, Vault } from 'vault/'
 import { Text } from 'components/Text'
 
 import { NativeSetupProps } from '../types'
@@ -30,7 +31,7 @@ export const NativeCreate = ({ history, location }: NativeSetupProps) => {
     setRevealed(!revealed)
   }
   const [vault, setVault] = useState<Vault | null>(null)
-  const [words, setWords] = useState<Component[] | null>(null)
+  const [words, setWords] = useState<JSX.Element[] | null>(null)
   const [revoker] = useState(new (Revocable(class {}))())
 
   const placeholders = useMemo(() => {
@@ -54,7 +55,7 @@ export const NativeCreate = ({ history, location }: NativeSetupProps) => {
       try {
         const vault = await Vault.create(undefined, false)
         vault.meta.set('createdAt', Date.now())
-        vault.set('#mnemonic', GENERATE_MNEMONIC)
+        vault.set('#mnemonic', await GENERATE_MNEMONIC)
         setVault(vault)
       } catch (e) {
         // @TODO
@@ -68,22 +69,24 @@ export const NativeCreate = ({ history, location }: NativeSetupProps) => {
     ;(async () => {
       try {
         setWords(
-          (await vault.unwrap().get('#mnemonic')).split(' ').map((word: string, index: number) =>
-            revocable(
-              <Tag
-                p={2}
-                flexBasis='31%'
-                justifyContent='flex-start'
-                fontSize='md'
-                key={word}
-                colorScheme='blue'
-              >
-                <Code mr={2}>{index + 1}</Code>
-                {word}
-              </Tag>,
-              revoker.addRevoker.bind(revocable)
+          mustBeDefined(await vault.unwrap().get<string>('#mnemonic'))
+            .split(' ')
+            .map((word: string, index: number) =>
+              revocable(
+                <Tag
+                  p={2}
+                  flexBasis='31%'
+                  justifyContent='flex-start'
+                  fontSize='md'
+                  key={word}
+                  colorScheme='blue'
+                >
+                  <Code mr={2}>{index + 1}</Code>
+                  {word}
+                </Tag>,
+                revoker.addRevoker.bind(revocable)
+              )
             )
-          )
         )
       } catch (e) {
         console.error('failed to get seed:', e)

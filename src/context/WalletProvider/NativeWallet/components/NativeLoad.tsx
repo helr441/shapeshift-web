@@ -10,12 +10,12 @@ import {
   ModalHeader,
   VStack
 } from '@chakra-ui/react'
-import { Vault } from '@shapeshiftoss/hdwallet-native-vault'
 import dayjs from 'dayjs'
 import { useEffect, useState } from 'react'
 import { FaWallet } from 'react-icons/fa'
 import { useTranslate } from 'react-polyglot'
 import { RouteComponentProps } from 'react-router-dom'
+import { Vault } from 'vault/'
 import { IconCircle } from 'components/IconCircle'
 import { Row } from 'components/Row/Row'
 import { RawText, Text } from 'components/Text'

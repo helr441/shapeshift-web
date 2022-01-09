@@ -1,8 +1,8 @@
 import { ArrowForwardIcon } from '@chakra-ui/icons'
 import { Button, Divider, ModalBody, ModalHeader, Stack } from '@chakra-ui/react'
-import { Vault } from '@shapeshiftoss/hdwallet-native-vault'
 import React, { useEffect } from 'react'
 import { RouteComponentProps } from 'react-router'
+import { Vault } from 'vault/'
 import { Text } from 'components/Text'
 import { useStateIfMounted } from 'hooks/useStateIfMounted/useStateIfMounted'
 

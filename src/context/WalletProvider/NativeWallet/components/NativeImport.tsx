@@ -6,10 +6,10 @@ import {
   ModalHeader,
   Textarea
 } from '@chakra-ui/react'
-import { Vault } from '@shapeshiftoss/hdwallet-native-vault'
 import * as bip39 from 'bip39'
 import { FieldValues, useForm } from 'react-hook-form'
 import { RouteComponentProps } from 'react-router-dom'
+import { Vault } from 'vault/'
 import { Text } from 'components/Text'
 
 export const NativeImport = ({ history }: RouteComponentProps) => {

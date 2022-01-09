@@ -1,7 +1,7 @@
 import * as native from '@shapeshiftoss/hdwallet-native'
 import { NativeHDWallet } from '@shapeshiftoss/hdwallet-native'
-import { Vault } from '@shapeshiftoss/hdwallet-native-vault'
 import { useEffect } from 'react'
+import type { Vault } from 'vault/'
 import { KeyManager, SUPPORTED_WALLETS } from 'context/WalletProvider/config'
 import { useWallet, WalletActions } from 'context/WalletProvider/WalletProvider'
 import { useStateIfMounted } from 'hooks/useStateIfMounted/useStateIfMounted'
