@@ -1,6 +1,5 @@
 import { Button, ModalBody, ModalHeader, Tag, Wrap } from '@chakra-ui/react'
-import { mustBeDefined } from '@shapeshiftoss/hdwallet-core'
-import * as native from '@shapeshiftoss/hdwallet-native'
+import { mustBeDefined, Revocable, revocable } from '@shapeshiftoss/hdwallet-core'
 import * as bip39 from 'bip39'
 import range from 'lodash/range'
 import shuffle from 'lodash/shuffle'
@@ -10,9 +9,6 @@ import { useCallback, useEffect, useState } from 'react'
 import { RawText, Text } from 'components/Text'
 
 import { NativeSetupProps } from '../types'
-
-const Revocable = native.crypto.Isolation.Engines.Default.Revocable
-const revocable = native.crypto.Isolation.Engines.Default.revocable
 
 const TEST_COUNT_REQUIRED = 3
 
