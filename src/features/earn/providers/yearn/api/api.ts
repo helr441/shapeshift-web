@@ -4,7 +4,7 @@ import axios, { AxiosInstance } from 'axios'
 import { BigNumber } from 'bignumber.js'
 import { MAX_ALLOWANCE } from 'constants/allowance'
 import { toLower } from 'lodash'
-import Web3 from 'web3'
+import type Web3 from 'web3'
 import { TransactionReceipt } from 'web3-core/types'
 import { bnOrZero } from 'lib/bignumber/bignumber'
 
@@ -65,14 +65,19 @@ export class YearnVaultApi {
   public vaults: YearnVault[]
   public yearnClient: AxiosInstance
 
-  constructor({ adapter, providerUrl }: ConstructorArgs) {
+  protected constructor(web3: typeof Web3, { adapter, providerUrl }: ConstructorArgs) {
     this.adapter = adapter
-    this.provider = new Web3.providers.HttpProvider(providerUrl)
-    this.web3 = new Web3(this.provider)
+    this.provider = new web3.providers.HttpProvider(providerUrl)
+    this.web3 = new web3(this.provider)
     this.yearnClient = axios.create({
       baseURL: 'https://api.yearn.finance/v1'
     })
     this.vaults = []
+  }
+
+  static async create(args: ConstructorArgs) {
+    const web3 = (await import('web3')).default
+    return new YearnVaultApi(web3, args)
   }
 
   async initialize() {
