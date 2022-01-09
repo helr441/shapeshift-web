@@ -1,8 +1,8 @@
-import React from 'react'
+import type React from 'react'
 import { RouteComponentProps } from 'react-router-dom'
-import { Vault } from 'vault/'
+import type { Vault } from 'vault/'
 
-import { ActionTypes } from '../WalletProvider'
+import type { ActionTypes } from '../WalletProvider'
 
 export interface LocationState {
   vault: Vault

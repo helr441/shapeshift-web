@@ -15,7 +15,7 @@ import { Text } from 'components/Text'
 export const NativeImport = ({ history }: RouteComponentProps) => {
   const onSubmit = async (values: FieldValues) => {
     try {
-      const vault = await Vault.create()
+      const vault = await (await Vault).create()
       vault.meta.set('createdAt', Date.now())
       vault.set('#mnemonic', values.mnemonic)
       history.push('/native/password', { vault })

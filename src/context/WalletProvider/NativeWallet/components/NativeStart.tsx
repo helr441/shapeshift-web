@@ -12,7 +12,7 @@ export const NativeStart = ({ history }: RouteComponentProps) => {
   useEffect(() => {
     ;(async () => {
       try {
-        const localWallets = await Vault.list()
+        const localWallets = await (await Vault).list()
         setHasLocalWallet(localWallets.length > 0)
       } catch (e) {
         console.error('WalletProvider:NativeWallet:Start - Cannnot enumerate Vault', e)

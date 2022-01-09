@@ -43,7 +43,7 @@ export const PasswordModal = ({ deviceId }: { deviceId: string }) => {
   const handleShowClick = () => setShowPw(!showPw)
   const onSubmit = async (values: FieldValues) => {
     try {
-      const vault = await Vault.open(deviceId, values.password)
+      const vault = await (await Vault).open(deviceId, values.password)
       const mnemonic = (await vault.get('#mnemonic')) as native.crypto.Isolation.Core.BIP39.Mnemonic
       mnemonic.addRevoker?.(() => vault.revoke())
       await wallet?.loadDevice({
