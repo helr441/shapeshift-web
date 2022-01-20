@@ -29,7 +29,7 @@ export const Layout = ({ route }: { route: Route }) => {
                 flexDir={{ base: 'column', lg: 'row' }}
               >
                 {route?.leftSidebar && <LeftSidebar route={route}>{route.leftSidebar}</LeftSidebar>}
-                {route.main}
+                {/* {route.main} */}
                 {route?.rightSidebar && <RightSidebar>{route.rightSidebar}</RightSidebar>}
               </Flex>
             </Box>

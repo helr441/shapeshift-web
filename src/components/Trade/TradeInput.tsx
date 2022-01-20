@@ -100,7 +100,7 @@ export const TradeInput = ({ history }: RouterProps) => {
       if (!result?.success && result?.statusReason) {
         handleToast(result.statusReason)
       }
-      result?.success && history.push({ pathname: '/trade/confirm', state: { fiatRate } })
+      result?.success && history.push({ pathname: '/trade/approval', state: { fiatRate } })
     } catch (err) {
       console.error(`TradeInput:onSubmit - ${err}`)
       handleToast(translate(TRADE_ERRORS.QUOTE_FAILED))
